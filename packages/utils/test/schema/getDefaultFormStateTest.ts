@@ -65,7 +65,10 @@ export default function getDefaultFormStateTest(
         };
         expect(
           computeDefaults(testValidator, schema, undefined, schema)
-        ).toEqual({ requiredProperty: "foo" });
+        ).toEqual({
+          optionalProperty: { nestedRequiredProperty: undefined },
+          requiredProperty: "foo",
+        });
       });
       it("test an object with an optional property that has a nested required property and includeUndefinedValues", () => {
         const schema: RJSFSchema = {
@@ -1417,7 +1420,7 @@ export default function getDefaultFormStateTest(
       });
     });
     describe("with schema keys not defined in the formData", () => {
-      it("shouldn`t add in undefined keys to formData", () => {
+      it("should add undefined keys to formData as default", () => {
         const schema: RJSFSchema = {
           type: "object",
           properties: {
@@ -1429,13 +1432,10 @@ export default function getDefaultFormStateTest(
           foo: "foo",
           baz: "baz",
         };
-        const result = {
-          foo: "foo",
-          baz: "baz",
-        };
-        expect(getDefaultFormState(testValidator, schema, formData)).toEqual(
-          result
-        );
+
+        expect(
+          "bar" in getDefaultFormState(testValidator, schema, formData)
+        ).toEqual(true);
       });
     });
   });

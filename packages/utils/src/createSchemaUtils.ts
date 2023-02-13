@@ -92,7 +92,7 @@ class SchemaUtils<
   getDefaultFormState(
     schema: S,
     formData?: T,
-    includeUndefinedValues: boolean | "excludeObjectChildren" = false
+    includeUndefinedValues: boolean | "excludeObjectChildren" = true // Persona hack to always intialize the form with all fields even if undefined
   ): T | T[] | undefined {
     return getDefaultFormState<T, S, F>(
       this.validator,

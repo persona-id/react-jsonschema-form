@@ -119,7 +119,6 @@ $RECYCLE.BIN/
 build
 _build
 site
-dist
 dist-temp
 lib
 yarn.lock

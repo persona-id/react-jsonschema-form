@@ -137,7 +137,7 @@ export function computeDefaults<
   parentDefaults?: T,
   rootSchema: S = {} as S,
   rawFormData?: T,
-  includeUndefinedValues: boolean | "excludeObjectChildren" = false
+  includeUndefinedValues: boolean | "excludeObjectChildren" = true // Persona hack to always intialize the form with all fields even if undefined
 ): T | T[] | undefined {
   const formData: T = (isObject(rawFormData) ? rawFormData : {}) as T;
   let schema: S = isObject(rawSchema) ? rawSchema : ({} as S);
@@ -356,7 +356,7 @@ export default function getDefaultFormState<
   theSchema: S,
   formData?: T,
   rootSchema?: S,
-  includeUndefinedValues: boolean | "excludeObjectChildren" = false
+  includeUndefinedValues: boolean | "excludeObjectChildren" = true // Persona hack to always intialize the form with all fields even if undefined
 ) {
   if (!isObject(theSchema)) {
     throw new Error("Invalid schema: " + theSchema);
